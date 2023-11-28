@@ -49,12 +49,12 @@ if args.block_type == 'conv_block':
     dim_reduction_block_type = ConvolutionalDimensionalityReductionBlock
 elif args.block_type == 'conv_bn_block':
     #Implemente batch normalization only
-    processing_block_type = ConvProcessingBlockBN
-    dim_reduction_block_type = ConvDimReductionBlockBN
+    processing_block_type = ConvolutionalProcessingBlockBN
+    dim_reduction_block_type = ConvolutionalDimensionalityReductionBlockBN
 elif args.block_type == 'conv_bn_rc_block':
     #Implemente both batch normalization and residual connections
-    processing_block_type = ConvProcessingBlockBNRC
-    dim_reduction_block_type = ConvDimReductionBlockBN
+    processing_block_type = ConvolutionalProcessingBlockBNRC
+    dim_reduction_block_type = ConvolutionalDimensionalityReductionBlockBNRC
 elif args.block_type == 'empty_block':
     processing_block_type = EmptyBlock
     dim_reduction_block_type = EmptyBlock
