@@ -41,9 +41,20 @@ train_data_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=T
 val_data_loader = DataLoader(val_data, batch_size=args.batch_size, shuffle=True, num_workers=2)
 test_data_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=True, num_workers=2)
 
+
+
+
 if args.block_type == 'conv_block':
     processing_block_type = ConvolutionalProcessingBlock
     dim_reduction_block_type = ConvolutionalDimensionalityReductionBlock
+elif args.block_type == 'conv_bn_block':
+    #Implemente batch normalization only
+    processing_block_type = ConvProcessingBlockBN
+    dim_reduction_block_type = ConvDimReductionBlockBN
+elif args.block_type == 'conv_bn_rc_block':
+    #Implemente both batch normalization and residual connections
+    processing_block_type = ConvProcessingBlockBNRC
+    dim_reduction_block_type = ConvDimReductionBlockBN
 elif args.block_type == 'empty_block':
     processing_block_type = EmptyBlock
     dim_reduction_block_type = EmptyBlock
