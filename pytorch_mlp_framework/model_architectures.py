@@ -424,8 +424,6 @@ class ConvolutionalProcessingBlockBNRC(nn.Module):
         out = self.layer_dict['conv_1'].forward(out)
         self.layer_dict['bn_1'] = nn.BatchNorm2d(self.num_filters)
         out = self.layer_dict['bn_1'].forward(out)
-        if self.downsample is not None:
-            residual = self.downsample(x)
 
         out += residual
         out = F.leaky_relu(out)
@@ -434,14 +432,12 @@ class ConvolutionalProcessingBlockBNRC(nn.Module):
 
     def forward(self, x):
         out = x
-
+        residual = x
         out = self.layer_dict['conv_0'].forward(out)
         out = self.layer_dict['bn_0'].forward(out)
         out = F.leaky_relu(out)
         out = self.layer_dict['conv_1'].forward(out)
         out = self.layer_dict['bn_1'].forward(out)
-        if self.downsample is not None:
-            residual = self.downsample(x)
 
         out += residual
         out = F.leaky_relu(out)
@@ -538,8 +534,6 @@ class ConvolutionalDimensionalityReductionBlockBNRC(nn.Module):
         out = self.layer_dict['conv_1'].forward(out)
         self.layer_dict['bn_1'] = nn.BatchNorm2d(self.num_filters)
         out = self.layer_dict['bn_1'].forward(out)
-        if self.downsample is not None:
-            residual = self.downsample(x)
 
         out += residual
         out = F.leaky_relu(out)
@@ -556,8 +550,6 @@ class ConvolutionalDimensionalityReductionBlockBNRC(nn.Module):
         out = F.avg_pool2d(out, self.reduction_factor)
 
         out = self.layer_dict['conv_1'].forward(out)
-        if self.downsample is not None:
-            residual = self.downsample(x)
 
         out += residual
         out = F.leaky_relu(out)
