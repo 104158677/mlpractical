@@ -363,7 +363,7 @@ class ConvolutionalProcessingBlockBN(nn.Module):
                                               padding=self.padding, stride=1)
         out = self.layer_dict['conv_0'].forward(out)
         #Implement the batch normalisation
-        self.layer_dict['bn_0'] = nn.BatchNorm2d(self.input_shape[1])
+        self.layer_dict['bn_0'] = nn.BatchNorm2d(self.num_filters)
         out = self.layer_dict['bn_0'].forward(out)
         out = F.leaky_relu(out)
 
